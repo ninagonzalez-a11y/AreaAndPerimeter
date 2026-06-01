@@ -2,7 +2,7 @@ public class Circle {
     // [UNDERSTAND] Radius variable restricts access to other classes and methods
     private double radius;
 
-    // [UNDERSTAND] Initialized the radius variables as a constructor
+    // [UNDERSTAND] Initialized the radius variables in a constructor
     public Circle(){
         this.radius = 0.0;
     }
@@ -45,6 +45,23 @@ public class Circle {
         p = 2.0*Math.PI*radius;
         // [UNDERSTAND] Returned a double value
         return p;
+    }
+
+    public static void main(String[] args) {
+        System.out.println("Testing Circle Class");
+        Circle circle1 = new Circle(3);
+        System.out.println("Circle 1 created with radius: " + circle1.getRadius());
+        System.out.println("Calculated Area: " + circle1.calculateArea()); // Expected Area is 28.27
+        System.out.println("Calculated Perimeter: " + circle1.calculatePerimeter()); //Expected Perimeter is 18.85
+
+        System.out.println("Testing if negative inputs are prevented");
+        Circle circle2 = new Circle(-5);
+        System.out.println("Circle 2 radius after checking: " + circle2.getRadius());
+
+        System.out.println("Testing is positive inputs are accepted");
+        circle1.setRadius(1);
+        System.out.println("Circle 2 radius after checking: " + circle2.getRadius());
+        System.out.println("Calculated Area: " + circle2.calculateArea());
     }
 
     }
