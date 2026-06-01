@@ -4,7 +4,7 @@ public class Rectangle {
     // [UNDERSTAND] Set height as double and restricted access to other classes and methods
     private double height;
 
-// [UNDERSTAND] Initialized the width and height as constructors
+// [UNDERSTAND] Initialized the width and height in a constructor
     public Rectangle(){
         this.width = 0.0;
         this.height = 0.0;
@@ -61,5 +61,25 @@ public class Rectangle {
         p = 2.0*(height + width);
         // [UNDERSTAND] Returned a double value
         return p;
+    }
+
+    public static void main(String[] args) {
+        System.out.println("Testing Rectangle Class");
+        Rectangle rectangle1 = new Rectangle(2, 4);
+        System.out.println("Rectangle 1 created with width: " + rectangle1.getWidth() + " and height: " + rectangle1.getHeight());
+        System.out.println("Calculated Area: " + rectangle1.calculateArea()); // Expected Area is 8
+        System.out.println("Calculated Perimeter: " + rectangle1.calculatePerimeter()); //Expected Perimeter is 12
+
+        System.out.println("Testing if negative inputs are prevented");
+        Rectangle rectangle2 = new Rectangle(-2, -3);
+        System.out.println("Rectangle 2 width after checking: " + rectangle2.getWidth());
+        System.out.println("Rectangle 2 height after checking" + rectangle2.getHeight());
+
+        System.out.println("Testing is positive inputs are accepted");
+        rectangle2.setWidth(1);
+        System.out.println("Rectangle 2 width after checking: " + rectangle2.getWidth());
+        rectangle2.setHeight(2);
+        System.out.println("Rectangle 2 height after checking: " + rectangle2.getHeight());
+        System.out.println("Calculated Area: " + rectangle2.calculateArea());
     }
 }

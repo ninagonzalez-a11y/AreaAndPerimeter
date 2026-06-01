@@ -45,4 +45,21 @@ public class Square {
         return p;
     }
 
+    public static void main(String[] args){
+        System.out.println("Testing Circle Class");
+        Circle circle1 = new Circle(5.0);
+        System.out.println("Circle 1 created with radius" +circle1.getRadius());
+        System.out.println("Calculated Area: " + circle1.calculateArea()); // Expected Area is 78.54
+        System.out.println("Calculated Perimeter: " + circle1.calculatePerimeter()); //Expected Perimeter is 31.43
+
+        System.out.println("Testing if negative inputs are prevented");
+        Circle circle2 = new Circle(-3.5);
+        System.out.println("Circle 2 radius after checking: " + circle2.getRadius());
+
+        System.out.println("Testing is positive inputs are accepted");
+        circle2.setRadius(4.0);
+        System.out.println("Circle 2 radius after checking: " +circle2.getRadius());
+        System.out.println("Calculated Area: " + circle2.calculateArea());
+    }
+
 }
