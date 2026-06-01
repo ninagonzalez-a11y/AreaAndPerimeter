@@ -1,8 +1,8 @@
 public class Circle {
-    // [UNDERSTAND] Radius variable restricts access to other classes
+    // [UNDERSTAND] Radius variable restricts access to other classes and methods
     private double radius;
 
-    // [UNDERSTAND] Initialized the radius variables
+    // [UNDERSTAND] Initialized the radius variables as a constructor
     public Circle(){
         this.radius = 0.0;
     }
@@ -28,6 +28,7 @@ public class Circle {
 
         }
 
+// [UNDERSTAND] Method to calculate the area of the circle
     public double calculateArea() {
         // [UNDERSTAND] Declared the 'a' variable for area
         double a;
@@ -36,7 +37,7 @@ public class Circle {
         // [UNDERSTAND] Returned a double value
         return a;
     }
-
+// [UNDERSTAND] Method to calculate the perimeter of the circle
     public double calculatePerimeter(){
         // [UNDERSTAND] Declared the 'p' variable
         double p;
