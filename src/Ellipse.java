@@ -69,21 +69,32 @@ public class Ellipse {
 
     public static void main(String[] args) {
         System.out.println("Testing Ellipse Class");
+        // [TRACE] Creates an ellipse with a semiMajorAxis of 6 and a semiMinorAxis of 7
         Ellipse ellipse1 = new Ellipse(6, 7);
+        // [UNDERSTAND] Checks if the correct semiMajorAxis and semiMinor axis is applied
         System.out.println("Ellipse 1 created with semiMajorAxis: " + ellipse1.getsemiMajorAxis() + " and semiMinorAxis: " + ellipse1.getsemiMinorAxis());
         System.out.println("Calculated Area: " + ellipse1.calculateArea()); // Expected Area is 131.95
         System.out.println("Calculated Perimeter: " + ellipse1.calculatePerimeter()); //Expected Perimeter is 40.90
 
+        // [UNDERSTAND] Checks if negative semiMajorAxis and semiMinorAxis are discarded
         System.out.println("Testing if negative inputs are prevented");
+        // [TRACE] Creates an ellipse with negative semiMajorAxis and semiMinorAxis
         Ellipse ellipse2 = new Ellipse(-1, -2);
+        // [UNDERSTAND] Checks if ellipse 2 had discarded the semiMajorAxis and semiMinorAxis
         System.out.println("Ellipse 2 semiMajorAxis after checking: " + ellipse2.getsemiMajorAxis());
         System.out.println("Ellipse 2 semiMinorAxis after checking: " + ellipse2.getsemiMinorAxis());
 
+        // [UNDERSTAND] Checks if positive semiMajorAxis and semiMinorAxis are correctly accepted
         System.out.println("Testing is positive inputs are accepted");
+        // [TRACE] Creates an ellipse with a semiMajorAxis of 2
         ellipse2.setsemiMajorAxis(2);
+        // [UNDERSTAND] Checks if the correct semiMajorAxis is applied
         System.out.println("Ellipse 2 semiMajorAxis after checking: " + ellipse2.getsemiMajorAxis());
+        // [TRACE] Creates an ellipse with a semiMinorAxis of 3
         ellipse2.setsemiMinorAxis(3);
+        // [UNDERSTAND] Checks if the correct semiMinorAxis is applied
         System.out.println("Ellipse 2 semiMinorAxis after checking: " + ellipse2.getsemiMinorAxis());
+        // [UNDERSTAND] Calculates the arrea of ellipse 2
         System.out.println("Calculated Area: " + ellipse2.calculateArea());
     }
 }
