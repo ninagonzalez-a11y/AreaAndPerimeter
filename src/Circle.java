@@ -49,18 +49,27 @@ public class Circle {
 
     public static void main(String[] args) {
         System.out.println("Testing Circle Class");
+        // [TRACE] Creates a circle with a radius 3
         Circle circle1 = new Circle(3);
+        // [UNDERSTAND] Checks to see if the circle created has correct radius
         System.out.println("Circle 1 created with radius: " + circle1.getRadius());
         System.out.println("Calculated Area: " + circle1.calculateArea()); // Expected Area is 28.27
         System.out.println("Calculated Perimeter: " + circle1.calculatePerimeter()); //Expected Perimeter is 18.85
 
+        // [UNDERSTAND] Tests if negative radius is discarded
         System.out.println("Testing if negative inputs are prevented");
+        // [TRACE] Creates a circle with a negative radius
         Circle circle2 = new Circle(-5);
+        // [UNDERSTAND] Checks if the negative radius of circle 2 is discarded
         System.out.println("Circle 2 radius after checking: " + circle2.getRadius());
 
+        // [UNDERSTAND] Tests if positive radius is applied correctly
         System.out.println("Testing is positive inputs are accepted");
+        // [TRACE] Creates a circle with a radius of 1
         circle1.setRadius(1);
+        // [UNDERSTAND] Checks if the circle 2 has correct radius
         System.out.println("Circle 2 radius after checking: " + circle2.getRadius());
+        // [UNDERSTAND] Calculates the area of circle 2
         System.out.println("Calculated Area: " + circle2.calculateArea());
     }
 
