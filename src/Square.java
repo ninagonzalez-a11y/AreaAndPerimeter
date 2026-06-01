@@ -1,14 +1,33 @@
 public class Square {
     // [UNDERSTAND] Declared a side variable as double restricting the access to other classes and methods
     private double side;
+    // [UNDERSTAND] Added to track whether the shape is solid or hollow
+    private boolean filled;
 
 // [UNDERSTAND] Initialized the side variable in a constructor
     public Square(){
         this.side = 0.0;
+        // [UNDERSTAND] This is the default state
+        this.filled = true;
     }
-// [DECISION] Used a constructor to create square object and added the input side as data to be used later
+// [DECISION] Used a constructor to create square object and added the input side as data to be used later and default filled state
     public Square(double side){
         setSide(side);
+        setFilled(true);
+    }
+
+    public Square(double side, boolean filled){
+        setSide(side);
+        setFilled(filled);
+    }
+
+    // [UNDERSTAND] Getter method for the filled state
+    public boolean isFilled(){
+        return filled;
+    }
+
+    public void setFilled(boolean filled){
+        this.filled = filled;
     }
 
 // [UNDERSTAND] Getter method for the side
@@ -45,30 +64,46 @@ public class Square {
         return p;
     }
 
-    public static void main(String[] args){
-        System.out.println("Testing Circle Class");
-        // [TRACE] Creates a circle with radius 5
-        Circle circle1 = new Circle(5.0);
-        // [UNDERSTAND] Tests to see if the proper radius is added
-        System.out.println("Circle 1 created with radius" +circle1.getRadius());
-        System.out.println("Calculated Area: " + circle1.calculateArea()); // Expected Area is 78.54
-        System.out.println("Calculated Perimeter: " + circle1.calculatePerimeter()); //Expected Perimeter is 31.43
+    // [UNDERSTAND] Prints an ASCII Art Square depending on the side value and filled state
+    public void printShape(){
+        // [UNDERSTAND] Converts the double side into an integer s to print our rows and columns
+        int s = (int)Math.round(side);
+        // [DECISION] Used an if-else statement to check if the double side was converted to a int 0
+        if(s<=0){
+            System.out.println("Cannot render an empty square");
+            return;
+        }
 
-        // [UNDERSTAND] Tests to see if negative radius are discarded
-        System.out.println("Testing if negative inputs are prevented");
-        // [TRACE] Creates a circle with a negative radius
-        Circle circle2 = new Circle(-3.5);
-        // [UNDERSTAND] Checks if negative radius is discarded
-        System.out.println("Circle 2 radius after checking: " + circle2.getRadius());
-
-        // [UNDERSTAND] Tests to see if positive radius are accepted
-        System.out.println("Testing is positive inputs are accepted");
-        // [TRACE] Creates a circle with radius 4
-        circle2.setRadius(4.0);
-        // [UNDERSTAND] Checks the updated circle2 radius
-        System.out.println("Circle 2 radius after checking: " +circle2.getRadius());
-        // [UNDERSTAND] Computes for circle 2's calculated area
-        System.out.println("Calculated Area: " + circle2.calculateArea());
+        // [UNDERSTAND] This initiates the outer loop, which manages the rows of the square
+        for(int i = 0; i<s; i++){
+            // [UNDERSTAND] This initiates the nested inner loop, which manages the columns within each row
+            for(int j=0;j<s;j++){
+                // [DECISION] Used an if-else statement to render the square, if none of the conditions are met then it is hollow
+                if(filled || i==0 || i == s-1 || j==0 || j==s-1){
+                    System.out.print("*");
+                }
+                else{
+                    System.out.print(" ");
+                }
+            }
+            // [UNDERSTAND] TO drop the cursor down to the next line
+            System.out.println();
+        }
     }
+
+    public static void main(String[] args){
+        System.out.println("Testing Square Output Format\n");
+
+        // Creating a filled square with a side length of 5
+        Square square1 = new Square(5.0, true);
+        square1.printShape();
+
+        System.out.println("\n-----------------------------------\n");
+
+        // Creating a hollow square with a side length of 5
+        Square square2 = new Square(5.0, false);
+        square2.printShape();
+    }
+
 
 }
