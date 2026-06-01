@@ -63,23 +63,35 @@ public class Rectangle {
         return p;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
         System.out.println("Testing Rectangle Class");
+        // [TRACE] Creates a rectangle with a width of 2 and height 4
         Rectangle rectangle1 = new Rectangle(2, 4);
-        System.out.println("Rectangle 1 created with width: " + rectangle1.getWidth() + " and height: " + rectangle1.getHeight());
+        // [UNDERSTAND] Tests to see if the correct width and height is displayed
+        System.out.println("Rectangle 1 created with width and height: " + rectangle1.getWidth() + rectangle1.getHeight());
         System.out.println("Calculated Area: " + rectangle1.calculateArea()); // Expected Area is 8
         System.out.println("Calculated Perimeter: " + rectangle1.calculatePerimeter()); //Expected Perimeter is 12
 
+        // [UNDERSTAND] Tests to see if negative width and height would be discarded
         System.out.println("Testing if negative inputs are prevented");
+        // [TRACE] Creates a rectangle with negative width and height
         Rectangle rectangle2 = new Rectangle(-2, -3);
+        // [UNDERSTAND] Displays the rectangle 2 width after going through the if-else statement
         System.out.println("Rectangle 2 width after checking: " + rectangle2.getWidth());
+        // [UNDERSTAND] Displays the rectangle 2 height after going through the if-else statement
         System.out.println("Rectangle 2 height after checking" + rectangle2.getHeight());
 
+        // [UNDERSTAND] Tests to see if positive inputs are applied correctly
         System.out.println("Testing is positive inputs are accepted");
+        // [TRACE] Created a rectangle with width 1
         rectangle2.setWidth(1);
+        // [UNDERSTAND] Checks if the proper width is displayed
         System.out.println("Rectangle 2 width after checking: " + rectangle2.getWidth());
+        // [TRACE] Created a rectangle with a height of 2
         rectangle2.setHeight(2);
+        // [UNDERSTAND] Checks if the proper height is displayed
         System.out.println("Rectangle 2 height after checking: " + rectangle2.getHeight());
+        // [UNDERSTAND] Calculates the area of rectangle 2 through concatenation
         System.out.println("Calculated Area: " + rectangle2.calculateArea());
-    }
+        }
 }
