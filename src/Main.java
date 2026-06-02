@@ -5,7 +5,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Welcome to the 2D Shapes Calculator App!");
 
-        int choice; // FIXED: Declared outside the loop so 'while' can see it
+        int choice;
 
         do {
             System.out.println("====================================");
@@ -18,8 +18,8 @@ public class Main {
             System.out.println("5. Triangle");
             System.out.println("6. Exit"); // Adjusted choices
             System.out.println("====================================");
-            System.out.print("Enter your choice (1-5): ");
-            choice = scanner.nextInt(); // FIXED: Removed 'int' keyword here
+            System.out.print("Enter your choice (1-6): ");
+            choice = scanner.nextInt();
 
             switch (choice) {
                 case 1:
@@ -38,12 +38,15 @@ public class Main {
                     Rectangle myRect = new Rectangle(w, h, true);
                     myRect.printShape();
                     System.out.println("Area: " + myRect.calculateArea());
+                    System.out.println("Perimeter: " + myRect.calculatePerimeter());
                     break;
                 case 3:
                     System.out.print("Enter radius of Circle: ");
                     double r = scanner.nextDouble();
                     Circle myCircle = new Circle(r, true);
                     myCircle.printShape();
+                    System.out.println("Area: " +myCircle.calculateArea());
+                    System.out.println("Perimeter: " +myCircle.calculatePerimeter());
                     break;
                 case 4:
                     System.out.print("Enter semi-major axis: ");
@@ -52,9 +55,18 @@ public class Main {
                     double b = scanner.nextDouble();
                     Ellipse myEllipse = new Ellipse(a, b, true);
                     myEllipse.printShape();
+                    System.out.println("Area: " +myEllipse.calculateArea());
+                    System.out.println("Perimeter: " +myEllipse.calculatePerimeter());
                     break;
 
                 case 5:
+                    System.out.print("Enter height: ");
+                    double c = scanner.nextDouble();
+                    Triangle myTriangle = new Triangle(c, true);
+                    myTriangle.printShape();
+                    System.out.println("Area: " +myTriangle.calculateArea());
+                    System.out.println("Perimeter: " + myTriangle.calculatePerimeter());
+                    break;
 
                 case 6:
                     System.out.println("Exiting App. Goodbye!");
