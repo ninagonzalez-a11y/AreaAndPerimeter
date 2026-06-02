@@ -94,13 +94,13 @@ public class Square {
     public static void main(String[] args){
         System.out.println("Testing Square Output Format\n");
 
-        // Creating a filled square with a side length of 5
+        // [TRACE] Creating a filled square with a side length of 5
         Square square1 = new Square(5.0, true);
         square1.printShape();
 
         System.out.println("\n-----------------------------------\n");
 
-        // Creating a hollow square with a side length of 5
+        // [TRACE] Creating a hollow square with a side length of 5
         Square square2 = new Square(5.0, false);
         square2.printShape();
     }

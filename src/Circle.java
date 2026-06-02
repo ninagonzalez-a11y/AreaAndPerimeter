@@ -1,15 +1,33 @@
 public class Circle {
     // [UNDERSTAND] Radius variable restricts access to other classes and methods
     private double radius;
+    private boolean filled;
 
     // [UNDERSTAND] Initialized the radius variables in a constructor
     public Circle(){
         this.radius = 0.0;
+        this.filled = true;
     }
 
     // [DECISION] Used a constructor to create the circle object and input the radius as data to be used later
     public Circle(double radius){
         setRadius(radius);
+        setFilled(true);
+    }
+
+    public Circle(double radius, boolean filled){
+        setRadius(radius);
+        setFilled(filled);
+    }
+
+    // [UNDERSTAND] Getter method for filled state
+    public boolean isFilled(){
+        return filled;
+    }
+
+    // [UNDERSTAND] Setter method for filled state
+    public void setFilled(boolean filled){
+        this.filled = filled;
     }
 
     // [UNDERSTAND] This is the getter method
@@ -47,31 +65,57 @@ public class Circle {
         return p;
     }
 
+    public void printShape() {
+        int r = (int) Math.round(radius);
+
+        if (r <= 0) {
+            System.out.println("Cannot render an empty circle");
+            return;
+        }
+
+        // [UNDERSTAND] Loops through a square bounding box grid from -r to +r
+        for (int i = -r; i <= r; i++) {
+            for (int j = -r; j <= r; j++) {
+                // [UNDERSTAND] Uses Pythagorean distance: x^2 + y^2
+                double distanceSq = (i * i) + (j * j);
+                double radiusSq = r * r;
+
+                // [DECISION] Determines whether to render an asterisk based on 'filled' state
+                if (filled) {
+                    // Check if current position is inside the circle boundary
+                    if (distanceSq <= radiusSq + 0.5) {
+                        System.out.print("* ");
+                    } else {
+                        System.out.print("  ");
+                    }
+                } else {
+                    // Approximate the thin outer ring outline edge of the circle
+                    if (distanceSq >= radiusSq - r && distanceSq <= radiusSq + r) {
+                        System.out.print("* ");
+                    } else {
+                        System.out.print("  ");
+                    }
+                }
+            }
+            System.out.println();
+        }
+    }
+
     public static void main(String[] args) {
-        System.out.println("Testing Circle Class");
-        // [TRACE] Creates a circle with a radius 3
-        Circle circle1 = new Circle(3);
-        // [UNDERSTAND] Checks to see if the circle created has correct radius
-        System.out.println("Circle 1 created with radius: " + circle1.getRadius());
-        System.out.println("Calculated Area: " + circle1.calculateArea()); // Expected Area is 28.27
-        System.out.println("Calculated Perimeter: " + circle1.calculatePerimeter()); //Expected Perimeter is 18.85
+        System.out.println("Testing Circle Output Format\n");
 
-        // [UNDERSTAND] Tests if negative radius is discarded
-        System.out.println("Testing if negative inputs are prevented");
-        // [TRACE] Creates a circle with a negative radius
-        Circle circle2 = new Circle(-5);
-        // [UNDERSTAND] Checks if the negative radius of circle 2 is discarded
-        System.out.println("Circle 2 radius after checking: " + circle2.getRadius());
+        // Testing a filled circle with a radius of 5
+        Circle circle1 = new Circle(5, true);
+        circle1.printShape();
 
-        // [UNDERSTAND] Tests if positive radius is applied correctly
-        System.out.println("Testing is positive inputs are accepted");
-        // [TRACE] Creates a circle with a radius of 1
-        circle1.setRadius(1);
-        // [UNDERSTAND] Checks if the circle 2 has correct radius
-        System.out.println("Circle 2 radius after checking: " + circle2.getRadius());
-        // [UNDERSTAND] Calculates the area of circle 2
-        System.out.println("Calculated Area: " + circle2.calculateArea());
+        System.out.println("\n-----------------------------------\n");
+
+        // Testing a hollow circle with a radius of 5
+        Circle circle2 = new Circle(5, false);
+        circle2.printShape();
     }
 
     }
+
+
 

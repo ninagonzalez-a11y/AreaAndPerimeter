@@ -3,17 +3,38 @@ public class Rectangle {
     private double width;
     // [UNDERSTAND] Set height as double and restricted access to other classes and methods
     private double height;
+    // [UNDERSTAND] Added a filled state
+    private boolean filled;
 
-// [UNDERSTAND] Initialized the width and height in a constructor
+// [UNDERSTAND] Initialized the width, height and the boolean filled state to true
     public Rectangle(){
         this.width = 0.0;
         this.height = 0.0;
+        this.filled = true;
     }
-// [DECISION] Used a constructor to create a rectangle object with inputs of width and height to be used later
+// [DECISION] Used a constructor to create a rectangle object with inputs of width and height to be used later and default filled state
     public Rectangle(double width, double height){
         setWidth(width);
         setHeight(height);
+        setFilled(true);
     }
+
+    public Rectangle(double width, double height, boolean filled){
+        setWidth(width);
+        setHeight(height);
+        setFilled(filled);
+    }
+
+    // [UNDERSTAND] Getter method for filled state
+    public boolean isFilled(){
+        return filled;
+    }
+
+    // [UNDERSTAND] Setter method for the filled state
+    public void setFilled(boolean filled){
+        this.filled = filled;
+    }
+
 // [UNDERSTAND] Getter method for width
     public double getWidth(){
         return width;
@@ -63,35 +84,41 @@ public class Rectangle {
         return p;
     }
 
-    public static void main(String[] args){
-        System.out.println("Testing Rectangle Class");
-        // [TRACE] Creates a rectangle with a width of 2 and height 4
-        Rectangle rectangle1 = new Rectangle(2, 4);
-        // [UNDERSTAND] Tests to see if the correct width and height is displayed
-        System.out.println("Rectangle 1 created with width and height: " + rectangle1.getWidth() + rectangle1.getHeight());
-        System.out.println("Calculated Area: " + rectangle1.calculateArea()); // Expected Area is 8
-        System.out.println("Calculated Perimeter: " + rectangle1.calculatePerimeter()); //Expected Perimeter is 12
+    public void printShape(){
+        // [TRACE] Converts the double width and height into int w and h
+        int w = (int) Math.round(width);
+        int h = (int) Math.round(height);
 
-        // [UNDERSTAND] Tests to see if negative width and height would be discarded
-        System.out.println("Testing if negative inputs are prevented");
-        // [TRACE] Creates a rectangle with negative width and height
-        Rectangle rectangle2 = new Rectangle(-2, -3);
-        // [UNDERSTAND] Displays the rectangle 2 width after going through the if-else statement
-        System.out.println("Rectangle 2 width after checking: " + rectangle2.getWidth());
-        // [UNDERSTAND] Displays the rectangle 2 height after going through the if-else statement
-        System.out.println("Rectangle 2 height after checking" + rectangle2.getHeight());
-
-        // [UNDERSTAND] Tests to see if positive inputs are applied correctly
-        System.out.println("Testing is positive inputs are accepted");
-        // [TRACE] Created a rectangle with width 1
-        rectangle2.setWidth(1);
-        // [UNDERSTAND] Checks if the proper width is displayed
-        System.out.println("Rectangle 2 width after checking: " + rectangle2.getWidth());
-        // [TRACE] Created a rectangle with a height of 2
-        rectangle2.setHeight(2);
-        // [UNDERSTAND] Checks if the proper height is displayed
-        System.out.println("Rectangle 2 height after checking: " + rectangle2.getHeight());
-        // [UNDERSTAND] Calculates the area of rectangle 2 through concatenation
-        System.out.println("Calculated Area: " + rectangle2.calculateArea());
+        // [DECISION] Used an if statement to prevent empty rectangles
+        if(w<=0||h<=0){
+            System.out.println("Cannot render an empty rectangle");
+            return;
         }
+
+        for(int i=0; i<h; i++){
+            for(int j=0;j<w;j++){
+                if(filled || i == 0 || i == h - 1 || j == 0 || j == w - 1){
+                    System.out.print("* ");
+                }
+                else{
+                    System.out.print("  ");
+                }
+            }
+            System.out.println();
+        }
+    }
+
+    public static void main(String[] args) {
+        System.out.println("Testing Rectangle Output Format\n");
+
+        Rectangle rectangle1 = new Rectangle(5, 3, true);
+        rectangle1.printShape();
+
+        System.out.println("\n-----------------------------------\n");
+
+        Rectangle rectangle2 = new Rectangle(5, 3, false);
+        rectangle2.printShape();
+    }
+
+
 }

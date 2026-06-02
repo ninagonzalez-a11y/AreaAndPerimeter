@@ -3,17 +3,36 @@ public class Ellipse {
     private double semiMajorAxis;
     // [UNDERSTAND] semiMinorAxis variable restricts access to other classes and methods
     private double semiMinorAxis;
+    private boolean filled;
 
 // [UNDERSTAND] Initialized the semiMajorAxis and semiMinorAxis in a constructor
     public Ellipse(){
         this.semiMajorAxis = 0.0;
         this.semiMinorAxis = 0.0;
+        this.filled = true;
     }
 
     // [DECISION] Used a constructor to build the ellipse and input the semiMajorAxis and semiMinorAxis as data to be used later
     public Ellipse(double semiMajorAxis, double semiMinorAxis){
         setsemiMajorAxis(semiMajorAxis);
         setsemiMinorAxis(semiMinorAxis);
+        setFilled(true);
+    }
+
+    public Ellipse(double semiMajorAxis, double semiMinorAxis, boolean filled){
+        setsemiMajorAxis(semiMajorAxis);
+        setsemiMinorAxis(semiMinorAxis);
+        setFilled(filled);
+    }
+
+    // [UNDERSTAND] Getter method for filled state
+    public boolean isFilled(){
+        return filled;
+    }
+
+    // [UNDERSTAND] Setter method for filled state
+    public void setFilled(boolean filled){
+        this.filled = filled;
     }
 // [UNDERSTAND] Getter method for semiMajorAxis
     public double getsemiMajorAxis(){
@@ -62,39 +81,47 @@ public class Ellipse {
         // [UNDERSTAND] Declared the 'h' value as the formula shown
         double h = ((semiMajorAxis-semiMinorAxis)*(semiMajorAxis-semiMinorAxis))/((semiMajorAxis+semiMinorAxis)*(semiMajorAxis+semiMinorAxis));
         // [UNDERSTAND] Set the formula for the perimeter of the ellipse
-        p = Math.PI*(semiMajorAxis + semiMinorAxis)*((1.0+(3.0*h))/(10.0+Math.sqrt(4.0-3.0*h)));
+        p = Math.PI*(semiMajorAxis + semiMinorAxis)*(1.0 + (3.0 * h)/(10.0+Math.sqrt(4.0-3.0*h)));
         // [UNDERSTAND] Returned a double value
         return p;
     }
 
+    public void printShape() {
+        int a = (int) Math.round(semiMajorAxis);
+        int b = (int) Math.round(semiMinorAxis);
+        if (a <= 0 || b <= 0) {
+            System.out.println("Cannot render empty ellipse");
+            return;
+        }
+        for (int y = -b; y <= b; y++) {
+            for (int x = -a; x <= a; x++) {
+                double equationVal = (double) (x * x) / (a * a) + (double) (y * y) / (b * b);
+                if (filled) {
+                    if (equationVal <= 1.0) System.out.print("*");
+                    else System.out.print(" ");
+                } else {
+                    // Check close proximity to the perimeter threshold boundary
+                    if (equationVal >= 0.75 && equationVal <= 1.05) System.out.print("*");
+                    else System.out.print(" ");
+                }
+            }
+            System.out.println();
+        }
+    }
+
     public static void main(String[] args) {
-        System.out.println("Testing Ellipse Class");
-        // [TRACE] Creates an ellipse with a semiMajorAxis of 6 and a semiMinorAxis of 7
-        Ellipse ellipse1 = new Ellipse(6, 7);
-        // [UNDERSTAND] Checks if the correct semiMajorAxis and semiMinor axis is applied
-        System.out.println("Ellipse 1 created with semiMajorAxis: " + ellipse1.getsemiMajorAxis() + " and semiMinorAxis: " + ellipse1.getsemiMinorAxis());
-        System.out.println("Calculated Area: " + ellipse1.calculateArea()); // Expected Area is 131.95
-        System.out.println("Calculated Perimeter: " + ellipse1.calculatePerimeter()); //Expected Perimeter is 40.90
+        System.out.println("Testing Ellipse Output Format\n");
 
-        // [UNDERSTAND] Checks if negative semiMajorAxis and semiMinorAxis are discarded
-        System.out.println("Testing if negative inputs are prevented");
-        // [TRACE] Creates an ellipse with negative semiMajorAxis and semiMinorAxis
-        Ellipse ellipse2 = new Ellipse(-1, -2);
-        // [UNDERSTAND] Checks if ellipse 2 had discarded the semiMajorAxis and semiMinorAxis
-        System.out.println("Ellipse 2 semiMajorAxis after checking: " + ellipse2.getsemiMajorAxis());
-        System.out.println("Ellipse 2 semiMinorAxis after checking: " + ellipse2.getsemiMinorAxis());
 
-        // [UNDERSTAND] Checks if positive semiMajorAxis and semiMinorAxis are correctly accepted
-        System.out.println("Testing is positive inputs are accepted");
-        // [TRACE] Creates an ellipse with a semiMajorAxis of 2
-        ellipse2.setsemiMajorAxis(2);
-        // [UNDERSTAND] Checks if the correct semiMajorAxis is applied
-        System.out.println("Ellipse 2 semiMajorAxis after checking: " + ellipse2.getsemiMajorAxis());
-        // [TRACE] Creates an ellipse with a semiMinorAxis of 3
-        ellipse2.setsemiMinorAxis(3);
-        // [UNDERSTAND] Checks if the correct semiMinorAxis is applied
-        System.out.println("Ellipse 2 semiMinorAxis after checking: " + ellipse2.getsemiMinorAxis());
-        // [UNDERSTAND] Calculates the arrea of ellipse 2
-        System.out.println("Calculated Area: " + ellipse2.calculateArea());
+        Ellipse ellipse1 = new Ellipse(5, 3, true);
+        ellipse1.printShape();
+
+        System.out.println("\n-----------------------------------\n");
+
+
+        Ellipse ellipse2 = new Ellipse(5, 3, false);
+        ellipse2.printShape();
+
+
     }
 }
